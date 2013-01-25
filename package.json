@@ -1,0 +1,18 @@
+{
+  "name": "l33teral",
+  "version": "0.0.1",
+  "author": "Nicholas Cloud",
+  "description": "functions to help deal with object literals",
+  "keywords": ["literals", "objects", "utilities"],
+  "dependencies": {
+    "underscore": "1.4.3"
+  },
+  "devDependencies": {
+    "mocha": "1.8.1",
+    "chai": "1.4.2",
+    "underscore": "1.4.3"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha ./test"
+  }
+}
