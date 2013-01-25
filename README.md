@@ -122,7 +122,7 @@ var user = {
 var l33tUser = l33t(user);
 l33tUser.hasAllProperties('name', 'title', 'startDate');
 // true
-``
+```
 
 ### hasAnyProperties (properties)
 
@@ -144,7 +144,7 @@ var user = {
 var l33tUser = l33t(user);
 l33tUser.hasAnyProperties('dob', 'title', 'ssn');
 // true
-``
+```
 
 ### hasAllGraphs (paths)
 
