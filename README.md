@@ -32,7 +32,11 @@ var myLiteral = {
       name: 'Susan',
       permissionLevel: 1,
       title: 'Badass',
-      startDate: '2013-01-01'
+      startDate: '2013-01-01',
+      phoneNumbers: [
+        '111-222-3333',
+        '444-555-6666'
+      ]
     },
     department: {
       title: 'IT',
@@ -98,8 +102,8 @@ if (myL33t.probe('data.user')) {
 ```javascript
 // assuming myL33t from above...
 
-var values = myL33t.collect('data.user.name', 'data.user.title', 'data.department.title');
-// ['Susan', 'Badass', 'IT']
+var values = myL33t.collect('data.user.name', 'data.user.phoneNumbers.1', 'data.department.title');
+// ['Susan', '444-555-6666', 'IT']
 ```
 
 ### hasAllProperties (properties)
@@ -156,7 +160,7 @@ Determines if the object has all of the specified graphs; uses `probe` to resolv
 ```javascript
 // assuming myL33t from above...
 
-myL33t.hasAllGraphs('data.user', 'data.department', 'data.user.title');
+myL33t.hasAllGraphs('data.user', 'data.department', 'data.user.phoneNumbers.0');
 // true
 ```
 
