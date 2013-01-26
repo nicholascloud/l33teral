@@ -144,6 +144,72 @@ describe('L33teral', function () {
     });
   });
 
+  describe('#extract()', function () {
+    it('should return all values for all graphs', function (done) {
+      var mock = mockObject();
+      var lit = new Literal(mock);
+
+      var actual = lit.extract('firstName', 'address.state', 'phoneNumber.1.type');
+      assert.equal(Object.keys(actual).length, 3);
+      assert.property(actual, 'firstName');
+      assert.property(actual, 'address.state');
+      assert.property(actual, 'phoneNumber.1.type');
+      assert.equal(actual['firstName'], 'John');
+      assert.equal(actual['address.state'], 'NY');
+      assert.equal(actual['phoneNumber.1.type'], 'fax');
+
+      var args = ['firstName', 'address.state', 'phoneNumber.1.type'];
+      actual = lit.extract(args);
+      assert.equal(Object.keys(actual).length, 3);
+      assert.property(actual, 'firstName');
+      assert.property(actual, 'address.state');
+      assert.property(actual, 'phoneNumber.1.type');
+      assert.equal(actual['firstName'], 'John');
+      assert.equal(actual['address.state'], 'NY');
+      assert.equal(actual['phoneNumber.1.type'], 'fax');
+
+      done();
+    });
+
+    it('should return undefined when graphs cannot be found', function (done) {
+      var mock = mockObject();
+      var lit = new Literal(mock);
+
+      var actual = lit.extract('firstName', 'address.missing', 'phoneNumber.1.missing');
+      assert.equal(Object.keys(actual).length, 3);
+      assert.property(actual, 'firstName');
+      assert.isTrue(actual.hasOwnProperty('address.missing'));
+      assert.isTrue(actual.hasOwnProperty('phoneNumber.1.missing'));
+      assert.equal(actual['firstName'], 'John');
+      assert.equal(actual['address.missing'], undefined);
+      assert.equal(actual['phoneNumber.1.missing'], undefined);
+
+      done();
+    });
+
+    it('should return default values when graphs cannot be found and default values are provided', function (done) {
+      var mock = mockObject();
+      var lit = new Literal(mock);
+
+      var args = {
+        'firstName': 'Steve',
+        'address.county': 'North County',
+        'phoneNumber.1.areaCode': '555'
+      };
+
+      var actual = lit.extract(args);
+      assert.equal(Object.keys(actual).length, 3);
+      assert.property(actual, 'firstName');
+      assert.isTrue(actual.hasOwnProperty('address.county'));
+      assert.isTrue(actual.hasOwnProperty('phoneNumber.1.areaCode'));
+      assert.equal(actual['firstName'], 'John');
+      assert.equal(actual['address.county'], args['address.county']);
+      assert.equal(actual['phoneNumber.1.areaCode'], args['phoneNumber.1.areaCode']);
+
+      done();
+    });
+  });
+
   describe('#hasAllProperties()', function () {
     it('should return true when all properties are present', function (done) {
       var mock = mockObject();

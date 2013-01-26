@@ -113,6 +113,43 @@ L33teral.prototype.collect = function (paths) {
 };
 
 /**
+ * Collects the values from multiple paths and puts them into
+ * an object literal where the keys are the paths and the values
+ * are those found at each path in the original object literal.
+ * If no default values are specified (e.g., `paths` is an arbitrary
+ * number of String parameters or an array), the value `undefined`
+ * will be used as a default value for paths that cannot be found.
+ * @param {...String|Array|Object} paths
+ */
+L33teral.prototype.extract = function (paths) {
+  var values = this.collect.apply(this, arguments);
+
+  if (_.isObject(paths) && !_.isArray(paths)) {
+    paths = Object.keys(paths);
+  }
+  if (!_.isArray(paths)) {
+    paths = Array.prototype.slice.call(arguments, 0);
+  }
+
+  var i = 0,
+    length = paths.length,
+    hash = {};
+
+  for (i; i < length; i++) {
+    hash[paths[i]] = values[i];
+  }
+
+  return hash;
+};
+
+/**
+ * Counts the number of properties on the object
+ */
+L33teral.prototype.length = function () {
+  return Object.keys(this.obj).length;
+};
+
+/**
  * Determines if the object has all specified properties
  * @param {...String|Array} properties
  * @return {Boolean}

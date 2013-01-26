@@ -106,6 +106,23 @@ var values = myL33t.collect('data.user.name', 'data.user.phoneNumbers.1', 'data.
 // ['Susan', '444-555-6666', 'IT']
 ```
 
+### extract (paths)
+
+Collects the values from multiple paths and puts them into an object literal where the keys are the paths and the values are those found at each path in the original object literal. If no default values are specified (e.g., `paths` is an arbitrary number of String parameters or an array), the value `undefined` will be used as a default value for paths that cannot be found.
+
+- @param {...String|Array|Object} paths
+
+```javascript
+// assuming myL33t from above...
+
+var values = myL33t.extract('data.user.name', 'data.user.phoneNumbers.1', 'data.department.title');
+// {
+//  'data.user.name': 'Susan',
+//  'data.user.phoneNumbers.1': '444-555-6666',
+//  'data.department.title': 'IT'
+// }
+```
+
 ### hasAllProperties (properties)
 
 Determines if the object has all specified properties
