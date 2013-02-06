@@ -2,7 +2,7 @@
 'use strict';
 var mocha = require('mocha'),
   assert = require('chai').assert,
-  Literal = require('../l33teral'),
+  leet = require('../l33teral'),
   GraphError = require('../graph-error'),
   mockObject = require('./mock-object');
 
@@ -11,7 +11,7 @@ describe('L33teral', function () {
   describe('#obj', function () {
     it('should be equal to the constructor argument', function (done) {
       var expected = mockObject();
-      var lit = new Literal(expected);
+      var lit = leet(expected);
       assert.equal(lit.obj, expected);
       done();
     });
@@ -20,7 +20,7 @@ describe('L33teral', function () {
   describe('#tap()', function () {
     it('should throw if the graph is not present and no default value is provided', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       assert.throw(function () {
         lit.tap('address.missing');
@@ -31,7 +31,7 @@ describe('L33teral', function () {
 
     it('should return the default value if no graph is present and the default value is provided', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var expected = '646';
       var actual = lit.tap('phoneNumber.1.areaCode', expected);
@@ -42,7 +42,7 @@ describe('L33teral', function () {
 
     it('should return the value at the path if the graph is present', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var expected = 'New York';
       var actual = lit.tap('address.city');
@@ -59,7 +59,7 @@ describe('L33teral', function () {
   describe('#probe()', function () {
     it('should return true if the object graph is present', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.probe('address.city');
       assert.isTrue(actual);
@@ -75,7 +75,7 @@ describe('L33teral', function () {
 
     it('should return false if the object graph is absent', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.probe('address.missing');
       assert.isFalse(actual);
@@ -93,7 +93,7 @@ describe('L33teral', function () {
   describe('#collect()', function () {
     it('should return all values for all graphs', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.collect('firstName', 'address.state', 'phoneNumber.1.type');
       assert.lengthOf(actual, 3);
@@ -113,7 +113,7 @@ describe('L33teral', function () {
 
     it('should return undefined when graphs cannot be found', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.collect('firstName', 'address.missing', 'phoneNumber.1.missing');
       assert.lengthOf(actual, 3);
@@ -126,7 +126,7 @@ describe('L33teral', function () {
 
     it('should return default values when graphs cannot be found and default values are provided', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var args = {
         'firstName': 'Steve',
@@ -147,7 +147,7 @@ describe('L33teral', function () {
   describe('#extract()', function () {
     it('should return all values for all graphs', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.extract('firstName', 'address.state', 'phoneNumber.1.type');
       assert.equal(Object.keys(actual).length, 3);
@@ -173,7 +173,7 @@ describe('L33teral', function () {
 
     it('should return undefined when graphs cannot be found', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.extract('firstName', 'address.missing', 'phoneNumber.1.missing');
       assert.equal(Object.keys(actual).length, 3);
@@ -189,7 +189,7 @@ describe('L33teral', function () {
 
     it('should return default values when graphs cannot be found and default values are provided', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var args = {
         'firstName': 'Steve',
@@ -213,7 +213,7 @@ describe('L33teral', function () {
   describe('#hasAllProperties()', function () {
     it('should return true when all properties are present', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.hasAllProperties('firstName', 'lastName', 'phoneNumber');
       assert.isTrue(actual);
@@ -227,7 +227,7 @@ describe('L33teral', function () {
 
     it('should return false if any properties are missing', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.hasAllProperties('firstName', 'lastName', 'missing');
       assert.isFalse(actual);
@@ -243,7 +243,7 @@ describe('L33teral', function () {
   describe('#hasAnyProperties()', function () {
     it('should return true if any properties are present', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.hasAnyProperties('firstName', 'missing1', 'missing2');
       assert.isTrue(actual);
@@ -257,7 +257,7 @@ describe('L33teral', function () {
 
     it('should return false if no properties are present', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.hasAnyProperties('missing1', 'missing2', 'missing3');
       assert.isFalse(actual);
@@ -273,7 +273,7 @@ describe('L33teral', function () {
   describe('#probeAll()', function () {
     it('should return true if all paths are present', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.probeAll('address.city', 'address.state', 'phoneNumber.0');
       assert.isTrue(actual);
@@ -287,7 +287,7 @@ describe('L33teral', function () {
 
     it('should return false if any paths are missing', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.probeAll('address.city', 'address.state', 'phoneNumber.0.missing');
       assert.isFalse(actual);
@@ -303,7 +303,7 @@ describe('L33teral', function () {
   describe('#probeAny()', function () {
     it('should return true if any paths are present', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.probeAny('address.missing', 'address.state', 'phoneNumber.2');
       assert.isTrue(actual);
@@ -317,7 +317,7 @@ describe('L33teral', function () {
 
     it('should return false if no paths are present', function (done) {
       var mock = mockObject();
-      var lit = new Literal(mock);
+      var lit = leet(mock);
 
       var actual = lit.probeAny('address.missing', 'missing', 'phoneNumber.2');
       assert.isFalse(actual);
