@@ -217,4 +217,6 @@ L33teral.prototype.probeAny = function (paths) {
   });
 };
 
-module.exports = L33teral;
+module.exports = function (literal) {
+	return new L33teral(literal);
+};

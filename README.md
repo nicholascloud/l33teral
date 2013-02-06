@@ -24,7 +24,7 @@ I hate this so much that I created this library, `l33teral` (pronounced: `leet-e
 Right now this is a node module, but I will probably port it to the browser soon.
 
 ```javascript
-var l33t = require('l33teral');
+var leet = require('l33teral');
 
 var myLiteral = {
   data: {
@@ -45,8 +45,8 @@ var myLiteral = {
   }
 };
 
-var myL33t = l33t(myLiteral);
-// now use methods on myL33t
+var myLeet = leet(myLiteral);
+// now use methods on myLeet
 ```
 
 ## The API
@@ -65,15 +65,15 @@ Traverses an object literal graph along `path` and returns a value if `path` exi
 - @throws {GraphError}
 
 ```javascript
-// assuming myL33t from above...
+// assuming myLeet from above...
 
-var permissionLevel = myL33t.tap('data.user.permissionLevel');
+var permissionLevel = myLeet.tap('data.user.permissionLevel');
 // 1
 
-var permissionName = myL33t.tap('data.user.permissionName', 'is-legit');
+var permissionName = myLeet.tap('data.user.permissionName', 'is-legit');
 // 'is-legit'
 
-var thisWillThrow = myL33t.tap('data.pandas');
+var thisWillThrow = myLeet.tap('data.pandas');
 // throws an instance of GraphError
 ```
 
@@ -85,10 +85,10 @@ Traverses an object literal along `path` and returns true or false if the path e
 - @return {Boolean}
 
 ```javascript
-// assuming myL33t from above...
+// assuming myLeet from above...
 
-if (myL33t.probe('data.user')) {
-  var user = myL33t.obj.data.user;
+if (myLeet.probe('data.user')) {
+  var user = myLeet.obj.data.user;
 }
 ```
 
@@ -100,9 +100,9 @@ if (myL33t.probe('data.user')) {
 - @return {Array}
 
 ```javascript
-// assuming myL33t from above...
+// assuming myLeet from above...
 
-var values = myL33t.collect('data.user.name', 'data.user.phoneNumbers.1', 'data.department.title');
+var values = myLeet.collect('data.user.name', 'data.user.phoneNumbers.1', 'data.department.title');
 // ['Susan', '444-555-6666', 'IT']
 ```
 
@@ -113,9 +113,9 @@ Collects the values from multiple paths and puts them into an object literal whe
 - @param {...String|Array|Object} paths
 
 ```javascript
-// assuming myL33t from above...
+// assuming myLeet from above...
 
-var values = myL33t.extract('data.user.name', 'data.user.phoneNumbers.1', 'data.department.title');
+var values = myLeet.extract('data.user.name', 'data.user.phoneNumbers.1', 'data.department.title');
 // {
 //  'data.user.name': 'Susan',
 //  'data.user.phoneNumbers.1': '444-555-6666',
@@ -140,8 +140,8 @@ var user = {
   startDate: '2013-01-01'
 };
 
-var l33tUser = l33t(user);
-l33tUser.hasAllProperties('name', 'title', 'startDate');
+var leetUser = leet(user);
+leetUser.hasAllProperties('name', 'title', 'startDate');
 // true
 ```
 
@@ -162,8 +162,8 @@ var user = {
   startDate: '2013-01-01'
 };
 
-var l33tUser = l33t(user);
-l33tUser.hasAnyProperties('dob', 'title', 'ssn');
+var leetUser = leet(user);
+leetUser.hasAnyProperties('dob', 'title', 'ssn');
 // true
 ```
 
@@ -175,9 +175,9 @@ Determines if the object has all of the specified paths
 - @return {Boolean}
 
 ```javascript
-// assuming myL33t from above...
+// assuming myLeet from above...
 
-myL33t.probeAll('data.user', 'data.department', 'data.user.phoneNumbers.0');
+myLeet.probeAll('data.user', 'data.department', 'data.user.phoneNumbers.0');
 // true
 ```
 
@@ -189,9 +189,9 @@ Determines if the object has any of the specified paths
 - @return {*}
 
 ```javascript
-// assuming myL33t from above...
+// assuming myLeet from above...
 
-myL33t.probeAny('data.bosses', 'data.department', 'wat');
+myLeet.probeAny('data.bosses', 'data.department', 'wat');
 // true
 ```
 
