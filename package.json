@@ -1,6 +1,6 @@
 {
   "name": "l33teral",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
   "keywords": ["literals", "objects", "utilities"],
@@ -12,6 +12,7 @@
     "chai": "1.4.2",
     "underscore": "1.4.3"
   },
+  "main": "./l33teral",
   "scripts": {
     "test": "./node_modules/.bin/mocha ./test"
   }
