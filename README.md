@@ -167,9 +167,9 @@ l33tUser.hasAnyProperties('dob', 'title', 'ssn');
 // true
 ```
 
-### hasAllGraphs (paths)
+### probeAll (paths)
 
-Determines if the object has all of the specified graphs; uses `probe` to resolve graphs.
+Determines if the object has all of the specified paths
 
 - @param {...String|Array} paths
 - @return {Boolean}
@@ -177,13 +177,13 @@ Determines if the object has all of the specified graphs; uses `probe` to resolv
 ```javascript
 // assuming myL33t from above...
 
-myL33t.hasAllGraphs('data.user', 'data.department', 'data.user.phoneNumbers.0');
+myL33t.probeAll('data.user', 'data.department', 'data.user.phoneNumbers.0');
 // true
 ```
 
-### hasAnyGraphs (paths)
+### probeAny (paths)
 
-Determines if the object has any of the specified graphs; uses `probe` to resolve graphs.
+Determines if the object has any of the specified paths
 
 - @param {...String|Array} paths
 - @return {*}
@@ -191,6 +191,18 @@ Determines if the object has any of the specified graphs; uses `probe` to resolv
 ```javascript
 // assuming myL33t from above...
 
-myL33t.hasAnyGraphs('data.bosses', 'data.department', 'wat');
+myL33t.probeAny('data.bosses', 'data.department', 'wat');
 // true
 ```
+
+-----
+
+## The MIT License (MIT)
+
+### Copyright (c) 2013 Nicholas Cloud
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

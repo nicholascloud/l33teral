@@ -184,12 +184,11 @@ L33teral.prototype.hasAnyProperties = function (properties) {
 };
 
 /**
- * Determines if the object has all of the specified graphs;
- * uses `probe` to resolve graphs.
+ * Determines if the object has all of the specified paths
  * @param {...String|Array} paths
  * @return {Boolean}
  */
-L33teral.prototype.hasAllGraphs = function (paths) {
+L33teral.prototype.probeAll = function (paths) {
   var self = this;
 
   if (!_.isArray(paths)) {
@@ -202,12 +201,11 @@ L33teral.prototype.hasAllGraphs = function (paths) {
 };
 
 /**
- * Determines if the object has any of the specified graphs;
- * uses `probe` to resolve graphs.
+ * Determines if the object has any of the specified paths
  * @param {...String|Array} paths
  * @return {*}
  */
-L33teral.prototype.hasAnyGraphs = function (paths) {
+L33teral.prototype.probeAny = function (paths) {
   var self = this;
 
   if (!_.isArray(paths)) {

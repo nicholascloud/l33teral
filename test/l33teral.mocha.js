@@ -270,60 +270,60 @@ describe('L33teral', function () {
     });
   });
 
-  describe('#hasAllGraphs()', function () {
-    it('should return true if all graphs are present', function (done) {
+  describe('#probeAll()', function () {
+    it('should return true if all paths are present', function (done) {
       var mock = mockObject();
       var lit = new Literal(mock);
 
-      var actual = lit.hasAllGraphs('address.city', 'address.state', 'phoneNumber.0');
+      var actual = lit.probeAll('address.city', 'address.state', 'phoneNumber.0');
       assert.isTrue(actual);
 
       var args = ['address.city', 'address.state', 'phoneNumber.0'];
-      actual = lit.hasAllGraphs(args);
+      actual = lit.probeAll(args);
       assert.isTrue(actual);
 
       done();
     });
 
-    it('should return false if any graphs are missing', function (done) {
+    it('should return false if any paths are missing', function (done) {
       var mock = mockObject();
       var lit = new Literal(mock);
 
-      var actual = lit.hasAllGraphs('address.city', 'address.state', 'phoneNumber.0.missing');
+      var actual = lit.probeAll('address.city', 'address.state', 'phoneNumber.0.missing');
       assert.isFalse(actual);
 
       var args = ['address.city', 'address.state', 'phoneNumber.0.missing'];
-      actual = lit.hasAllGraphs(args);
+      actual = lit.probeAll(args);
       assert.isFalse(actual);
 
       done();
     });
   });
 
-  describe('#hasAnyGraphs()', function () {
-    it('should return true if any graphs are present', function (done) {
+  describe('#probeAny()', function () {
+    it('should return true if any paths are present', function (done) {
       var mock = mockObject();
       var lit = new Literal(mock);
 
-      var actual = lit.hasAnyGraphs('address.missing', 'address.state', 'phoneNumber.2');
+      var actual = lit.probeAny('address.missing', 'address.state', 'phoneNumber.2');
       assert.isTrue(actual);
 
       var args = ['address.missing', 'address.state', 'phoneNumber.2'];
-      actual = lit.hasAnyGraphs(args);
+      actual = lit.probeAny(args);
       assert.isTrue(actual);
 
       done();
     });
 
-    it('should return false if no graphs are present', function (done) {
+    it('should return false if no paths are present', function (done) {
       var mock = mockObject();
       var lit = new Literal(mock);
 
-      var actual = lit.hasAnyGraphs('address.missing', 'missing', 'phoneNumber.2');
+      var actual = lit.probeAny('address.missing', 'missing', 'phoneNumber.2');
       assert.isFalse(actual);
 
       var args = ['address.missing', 'missing', 'phoneNumber.2'];
-      actual = lit.hasAnyGraphs(args);
+      actual = lit.probeAny(args);
       assert.isFalse(actual);
 
       done();
