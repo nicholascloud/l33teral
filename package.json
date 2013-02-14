@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "jake": "latest",
-    "async": "latest",
+    "async": "0.2.5",
     "mocha": "1.8.1",
     "chai": "1.4.2",
     "underscore": "1.4.3",
@@ -18,7 +18,6 @@
   "main": "./build/l33teral-0.7.0",
   "scripts": {
     "test": "jake test --trace",
-    "install": "jake build",
-    "update": "jake build"
+    "prepublish": "jake build"
   }
 }

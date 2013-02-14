@@ -32,8 +32,10 @@ task('build', [BUILD_DIR], function () {
   var outputFile = path.join(BUILD_DIR, 'l33teral-' + pkg.version + '.js');
   concatFiles(inputFiles, outputFile, function (err) {
     if (err) {
-      console.error(err);
+      return console.error(err);
     }
+    console.log('Build complete.');
+    console.log('Output:', outputFile);
   });
 });
 
