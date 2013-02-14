@@ -3,7 +3,6 @@
 var mocha = require('mocha'),
   assert = require('chai').assert,
   leet = require('../l33teral'),
-  GraphError = require('../graph-error'),
   mockObject = require('./mock-object');
 
 describe('L33teral', function () {
@@ -24,7 +23,7 @@ describe('L33teral', function () {
 
       assert.throw(function () {
         leetMock.tap('address.missing');
-      }, GraphError);
+      }, Error);
 
       done();
     });

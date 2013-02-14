@@ -1,6 +1,6 @@
 {
   "name": "l33teral",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
   "keywords": ["literals", "objects", "utilities"],
@@ -8,13 +8,17 @@
     "underscore": "1.4.3"
   },
   "devDependencies": {
+    "jake": "latest",
+    "async": "latest",
     "mocha": "1.8.1",
     "chai": "1.4.2",
     "underscore": "1.4.3",
-	"clone": "0.1.5"
+    "clone": "0.1.5"
   },
-  "main": "./l33teral",
+  "main": "./build/l33teral-0.7.0",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./test"
+    "test": "jake test --trace",
+    "install": "jake build",
+    "update": "jake build"
   }
 }
