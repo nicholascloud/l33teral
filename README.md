@@ -36,7 +36,8 @@ var myLiteral = {
       phoneNumbers: [
         '111-222-3333',
         '444-555-6666'
-      ]
+      ],
+      isFullTime: true
     },
     department: {
       title: 'IT',
@@ -193,6 +194,39 @@ Determines if the object has any of the specified paths
 
 myLeet.probeAny('data.bosses', 'data.department', 'wat');
 // true
+```
+
+### truthy (paths)
+
+Determines if the object has the path(s) specified, and if the value at path(s) is truthy.
+
+- @param {...String|Array} paths
+- @return {Boolean}
+
+```javascript
+// assuming myLeet from above...
+
+myLeet.truthy('data.user.isFullTime');
+//true
+
+myLeet.truthy('data.department.employeeCount');
+//false; missing property 'employeeCount'
+```
+
+### plant (path, value)
+
+Plants a value at a path, creating the graph if it does not exist. All segments in the path are treated as object properties.
+
+- @param {String} path
+- @param {*} value
+- @return
+
+```javascript
+// assuming myLeet from above...
+
+var schedule = ['M', 'T', 'W', 'F'];
+myLeet.plant('data.user.schedule', schedule);
+//myLeet.obj.data.user.schedule === schedule
 ```
 
 -----

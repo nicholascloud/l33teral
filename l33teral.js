@@ -217,6 +217,63 @@ L33teral.prototype.probeAny = function (paths) {
   });
 };
 
+/**
+ * Determines if the object has the path(s) specified, and if the
+ * value at path(s) is truthy.
+ * @param {...String|Array} paths
+ * @return {Boolean}
+ */
+L33teral.prototype.truthy = function (paths) {
+	var self = this;
+
+	if (!_.isArray(paths)) {
+		paths = Array.prototype.slice.call(arguments, 0);
+	}
+
+	return paths.every(function (path) {
+		return self.probe(path) && !!self.tap(path);
+	});
+};
+
+/**
+ * Plants a value at a path, creating the graph if it does not exist. All
+ * segments in the path are treated as object properties.
+ * @param {String} path
+ * @param {*} value
+ * @return
+ */
+L33teral.prototype.plant = function (path, value) {
+  if (!path) {
+    return;
+  }
+
+	var current = this.obj,
+	  segments = path.split('.'),
+		position = 0,
+		length = segments.length,
+    segment;
+
+  function isMore() {
+    return position < length;
+  }
+
+  function isLast() {
+    return position === (length - 1);
+  }
+
+	while(isMore()) {
+    segment = segments[position];
+    if (!current.hasOwnProperty(segment)) {
+      current[segment] = {};
+    }
+    if (isLast()) {
+      current[segment] = value;
+    }
+    current = current[segment];
+    position += 1;
+	}
+};
+
 module.exports = function (literal) {
 	return new L33teral(literal);
 };

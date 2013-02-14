@@ -10,7 +10,8 @@
   "devDependencies": {
     "mocha": "1.8.1",
     "chai": "1.4.2",
-    "underscore": "1.4.3"
+    "underscore": "1.4.3",
+	"clone": "0.1.5"
   },
   "main": "./l33teral",
   "scripts": {

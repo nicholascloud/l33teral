@@ -1,7 +1,6 @@
 'use strict';
-var _ = require('underscore');
+var clone = require('clone');
 
-//http://www.jquery4u.com/json/customer-form-json-file-example/
 var obj = {
   "firstName": "John",
   "lastName": "Smith",
@@ -25,5 +24,5 @@ var obj = {
 };
 
 module.exports = function () {
-  return _.clone(obj);
+  return clone(obj);
 };
