@@ -23,6 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+/*global module, require, define*/
 'use strict';
 (function (global, factory) {
 
@@ -36,7 +37,7 @@
 
   // AMD module
   if (typeof define === 'function' && define.amd) {
-    return define('l33teral', ['underscore'], function (_) {
+    return define(['underscore'], function (_) {
       return factory(_, global);
     });
   }

@@ -1,27 +1,35 @@
-/*global jake, desc, task, directory, file*/
+/*global jake, desc, task, directory, file, complete*/
 'use strict';
 var pkg = require('./package.json'),
   path = require('path'),
   fs = require('fs'),
   os = require('os'),
-  async = require('async');
+  async = require('async'),
+  rimraf = require('rimraf');
 
 var ROOT_DIR = __dirname,
   BUILD_DIR = path.join(ROOT_DIR, 'build'),
   TEST_DIR = path.join(ROOT_DIR, 'test');
 
 namespace('package', function () {
-  desc('gets the project version from package.json');
+  // gets the project version from package.json
   task('version', function () {
     return pkg.version;
   });
 });
 
-desc('creates the build directory');
+// creates the build directory
 directory(BUILD_DIR);
 
-desc('builds l33teral');
-task('build', [BUILD_DIR], function () {
+desc('cleans previous builds');
+task('clean', function () {
+  rimraf(BUILD_DIR, function (err) {
+    complete();
+  });
+}, {async: true});
+
+desc('builds project');
+task('build', ['clean', BUILD_DIR], function () {
   console.log('@@ ROOT_DIR', ROOT_DIR);
   console.log('@@ BUILD_DIR', BUILD_DIR);
 
