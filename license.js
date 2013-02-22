@@ -1,5 +1,5 @@
 /**
- * l33teral
+ * l33teral {{VERSION}}
  *
  * The MIT License (MIT)
  *

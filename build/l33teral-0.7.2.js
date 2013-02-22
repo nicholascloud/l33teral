@@ -1,5 +1,5 @@
 /**
- * l33teral
+ * l33teral 0.7.2
  *
  * The MIT License (MIT)
  *
@@ -92,7 +92,7 @@
         continue;
       }
 
-      if (defaultValue !== undefined) {
+      if (arguments.length === 2) {
         return defaultValue;
       }
 

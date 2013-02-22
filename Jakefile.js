@@ -11,6 +11,8 @@ var ROOT_DIR = __dirname,
   BUILD_DIR = path.join(ROOT_DIR, 'build'),
   TEST_DIR = path.join(ROOT_DIR, 'test');
 
+var VERSION_TEMPLATE_VAR = '{{VERSION}}';
+
 namespace('package', function () {
   // gets the project version from package.json
   task('version', function () {
@@ -53,7 +55,8 @@ task('test', function () {
 
   var mochaBin = path.join(ROOT_DIR, 'node_modules', '.bin', 'mocha');
   var testCmd = mochaBin + ' ' + TEST_DIR;
-  jake.exec(testCmd, function () {}, {printStdout: true});
+  jake.exec(testCmd, function () {
+  }, {printStdout: true});
 });
 
 task('default', function () {
@@ -65,8 +68,8 @@ task('default', function () {
 function concatFiles(files, outputFile, callback) {
   var readHandlers = files.map(function (file) {
     return function (callback) {
-      fs.readFile(file, function (err, data) {
-        callback(err, data);
+      fs.readFile(file, function (err, contentBuffer) {
+        callback(err, contentBuffer);
       })
     };
   });
@@ -75,6 +78,8 @@ function concatFiles(files, outputFile, callback) {
     if (err) {
       return callback(err);
     }
-    fs.writeFile(outputFile, files.join(os.EOL), callback);
+    var output = files.join(os.EOL)
+      .replace(VERSION_TEMPLATE_VAR, pkg.version);
+    fs.writeFile(outputFile, output, callback);
   });
 }
