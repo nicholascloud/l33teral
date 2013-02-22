@@ -92,7 +92,7 @@
         continue;
       }
 
-      if (defaultValue !== undefined) {
+      if (arguments.length === 2) {
         return defaultValue;
       }
 
