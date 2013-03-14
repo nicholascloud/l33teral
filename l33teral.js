@@ -42,7 +42,7 @@
    * @constructor
    */
   function L33teral(obj) {
-    this.obj = obj;
+    this.obj = obj || {};
   }
 
   /**

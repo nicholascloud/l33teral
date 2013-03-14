@@ -1,6 +1,6 @@
 {
   "name": "l33teral",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
   "keywords": ["literals", "objects", "utilities"],
@@ -16,7 +16,7 @@
     "clone": "0.1.5",
     "rimraf": "2.1.4"
   },
-  "main": "./build/l33teral-0.7.2",
+  "main": "./build/l33teral-0.7.3",
   "scripts": {
     "test": "jake test --trace",
     "prepublish": "jake build"
