@@ -21,7 +21,7 @@ I hate this so much that I created this library, `l33teral` (pronounced: `leet-e
 
 ## Usage
 
-Right now this is a node module, but I will probably port it to the browser soon.
+_l33teral will work in node.js, or in the browser with require.js, or in the browser as a direct include with script tags. All examples in the README are node.js examples, but the API is the same regardless of environment._
 
 ```javascript
 var leet = require('l33teral');
