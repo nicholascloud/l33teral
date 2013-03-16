@@ -4,6 +4,10 @@
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
   "keywords": ["literals", "objects", "utilities"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicholascloud/l33teral"
+  },
   "dependencies": {
     "underscore": "1.4.3"
   },
