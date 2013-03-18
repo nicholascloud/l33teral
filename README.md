@@ -1,6 +1,6 @@
 # l33teral
 
-[![Build Status](https://travis-ci.org/[nicholascloud]/[l33teral].png)](https://travis-ci.org/[nicholascloud]/[l33teral])
+[![Build Status](https://travis-ci.org/nicholascloud/l33teral.png)](https://travis-ci.org/nicholascloud/l33teral)
 
 People who write JavaScript really like object literals. They are easy to use, easy to modify, and a general pain in the ass when used like this:
 
