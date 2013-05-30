@@ -56,6 +56,18 @@ describe('L33teral', function () {
       done();
     });
 
+    it('should return the default value if the graph is present by the value is undefined', function (done) {
+      var mock = mockObject();
+      mock.address.city = undefined;
+      var leetMock = leet(mock);
+
+      var expected = 'none';
+      var actual = leetMock.tap('address.city', expected);
+      assert.equal(actual, expected);
+
+      done();
+    });
+
     it('should return the value at the path if the graph is present', function (done) {
       var mock = mockObject();
       var leetMock = leet(mock);

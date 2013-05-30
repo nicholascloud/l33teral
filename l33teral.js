@@ -59,7 +59,8 @@
     var properties = path.split('.'),
       value = this.obj,
       index = -1,
-      lastIndex = properties.length - 1;
+      lastIndex = (properties.length - 1),
+      useDefault = (arguments.length === 2);
 
     while (++index <= lastIndex) {
       if (value.hasOwnProperty(properties[index])) {
@@ -67,7 +68,7 @@
         continue;
       }
 
-      if (arguments.length === 2) {
+      if (useDefault) {
         return defaultValue;
       }
 
@@ -75,6 +76,11 @@
       e.failedAt = properties.slice(0, index + 1).join('.');
       throw e;
     }
+
+    if (_.isUndefined(value) && useDefault) {
+      return defaultValue;
+    }
+
     return value;
   };
 
