@@ -3,10 +3,21 @@
 var _ = require('underscore'),
   mocha = require('mocha'),
   assert = require('chai').assert,
-  leet = require('../l33teral'),
+  version = require('../package.json').version,
+  leet = require('../build/l33teral-' + version),
   mockObject = require('./mock-object');
 
 describe('L33teral', function () {
+
+  describe('#__version__', function () {
+    it('should be equal to the package version', function (done) {
+      var leetMock = leet(null);
+      var actual = leetMock.__version__;
+      var expected = version;
+      assert.equal(actual, expected);
+      done();
+    });
+  });
 
   describe('#obj', function () {
     it('should be equal to the constructor argument', function (done) {
@@ -78,6 +89,10 @@ describe('L33teral', function () {
 
       expected = 'fax';
       actual = leetMock.tap('phoneNumber.1.type');
+      assert.equal(actual, expected);
+
+      expected = 10021;
+      actual = leetMock.tap('address.postalCode');
       assert.equal(actual, expected);
 
       done();

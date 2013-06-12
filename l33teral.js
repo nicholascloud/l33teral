@@ -42,6 +42,7 @@
    * @constructor
    */
   function L33teral(obj) {
+    this.__version__ = '{{VERSION}}';
     this.obj = obj || {};
   }
 

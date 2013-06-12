@@ -9,7 +9,7 @@ var obj = {
     "streetAddress": "21 2nd Street",
     "city": "New York",
     "state": "NY",
-    "postalCode": "10021"
+    "postalCode": 10021
   },
   "phoneNumber": [
     {

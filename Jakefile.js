@@ -11,7 +11,7 @@ var ROOT_DIR = __dirname,
   BUILD_DIR = path.join(ROOT_DIR, 'build'),
   TEST_DIR = path.join(ROOT_DIR, 'test');
 
-var VERSION_TEMPLATE_VAR = '{{VERSION}}';
+var VERSION_TEMPLATE_VAR = /\{\{VERSION\}\}/g;
 
 namespace('package', function () {
   // gets the project version from package.json
@@ -50,7 +50,7 @@ task('build', ['clean', BUILD_DIR], function () {
 });
 
 desc('runs unit tests');
-task('test', function () {
+task('test', ['build'], function () {
   console.log('@@ TEST_DIR', TEST_DIR);
 
   var mochaBin = path.join(ROOT_DIR, 'node_modules', '.bin', 'mocha');
