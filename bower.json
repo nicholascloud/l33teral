@@ -1,6 +1,7 @@
 {
   "name": "l33teral",
   "version": "1.0.0",
+  "location": "git://github.com/nicholascloud/l33teral",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
   "keywords": ["literals", "objects", "utilities"],
@@ -20,9 +21,10 @@
     "clone": "0.1.5",
     "rimraf": "2.1.4"
   },
-  "main": "./build/l33teral-1.0.0",
-  "scripts": {
-    "test": "./node_modules/.bin/jake test --trace",
-    "prepublish": "./node_modules/.bin/jake build"
-  }
+  "main": "./build/l33teral-1.0.0.js",
+  "ignore": [
+    "./test/**/*",
+    ".jshintignore",
+    ".jshintrc"
+  ]
 }

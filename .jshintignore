@@ -1,0 +1,4 @@
+node_modules/
+public/lib/
+public/bower_components/
+.tmp/

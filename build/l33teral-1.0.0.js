@@ -1,5 +1,5 @@
 /**
- * l33teral 0.7.5
+ * l33teral 1.0.0
  *
  * The MIT License (MIT)
  *
@@ -55,7 +55,6 @@
   function GraphError(message) {
     Error.apply(this, arguments);
     this.name = 'GraphError';
-    this.message = message;
   }
 
   GraphError.prototype = new Error();
@@ -67,7 +66,7 @@
    * @constructor
    */
   function L33teral(obj) {
-    this.__version__ = '0.7.5';
+    this.__version__ = '1.0.0';
     this.obj = obj || {};
   }
 
