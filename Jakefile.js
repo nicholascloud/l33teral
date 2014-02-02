@@ -39,7 +39,7 @@ task('build', ['clean', BUILD_DIR], function () {
     path.join(ROOT_DIR, 'license.js'),
     path.join(ROOT_DIR, 'l33teral.js')
   ];
-  var outputFile = path.join(BUILD_DIR, 'l33teral-' + pkg.version + '.js');
+  var outputFile = path.join(BUILD_DIR, 'l33teral-latest.js');
   concatFiles(inputFiles, outputFile, function (err) {
     if (err) {
       return console.error(err);

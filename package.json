@@ -20,7 +20,7 @@
     "clone": "0.1.5",
     "rimraf": "2.1.4"
   },
-  "main": "./build/l33teral-1.0.0",
+  "main": "./build/l33teral-latest",
   "scripts": {
     "test": "./node_modules/.bin/jake test --trace",
     "prepublish": "./node_modules/.bin/jake build"

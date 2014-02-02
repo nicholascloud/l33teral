@@ -345,7 +345,7 @@
   };
 
   /**
-   * Deletes the key at the end of an object path
+   * Deletes the key at the end of an object path.
    * @param {String} path
    * @param {Boolean} [suppressError] - prevent a {GraphError} from being thrown if
    * any part of the path cannot be fully resolved
