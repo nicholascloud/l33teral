@@ -441,4 +441,79 @@ describe('L33teral', function () {
       done();
     });
   });
+
+  describe('#snip()', function () {
+    it('removes a single property at the end of a path', function (done) {
+      var mock = {foo: {bar: {baz: 'bin'}}};
+      var mockLeet = leet(mock);
+      mockLeet.snip('foo.bar.baz');
+      assert.property(mock.foo, 'bar');
+      assert.notProperty(mock.foo.bar, 'baz');
+      done();
+    });
+
+    it('throws a graph error if part of the path does not exist', function (done) {
+      var mock = {foo: {bar: {baz: 'bin'}}};
+      var mockLeet = leet(mock);
+
+      assert.throw(function () {
+        mockLeet.snip('foo.buz.baz');
+      }, Error);
+
+      done();
+    });
+
+    it('exits silently if instructed to suppress errors and part of the path does not exist', function (done) {
+      var mock = {foo: {bar: {baz: 'bin'}}};
+      var mockLeet = leet(mock);
+      mockLeet.snip('foo.buz.baz', true);
+      done();
+    });
+  });
+
+  describe('#purge()', function () {
+    it('removes all properties along a path when their values are empty objects', function (done) {
+      var mock = {foo: {bar: {baz: {bin: {} } } } };
+      var mockLeet = leet(mock);
+      mockLeet.purge('foo.bar.baz.bin');
+      assert.lengthOf(Object.keys(mock), 0);
+      done();
+    });
+
+    it('removes all properties along a path until it encounters a non-empty object', function (done) {
+      var mock = {foo: {stop:1, bar: {baz: {bin: {} } } } };
+      var mockLeet = leet(mock);
+      mockLeet.purge('foo.bar.baz.bin');
+      assert.property(mock, 'foo');
+      assert.property(mock.foo, 'stop');
+      assert.notProperty(mock.foo, 'bar');
+      done();
+    });
+
+    it('throws a graph error if part of the path does not exist', function (done) {
+      var mock = {foo: {bar: {baz: {bin: {} } } } };
+      var mockLeet = leet(mock);
+
+      assert.throw(function () {
+        mockLeet.purge('foo.buz.baz');
+      }, Error);
+
+      assert.property(mock, 'foo');
+      assert.property(mock.foo, 'bar');
+      assert.property(mock.foo.bar, 'baz');
+      assert.property(mock.foo.bar.baz, 'bin');
+      done();
+    });
+
+    it('exits silently if instructed to suppress errors and part of the path does not exist', function (done) {
+      var mock = {foo: {bar: {baz: {bin: {} } } } };
+      var mockLeet = leet(mock);
+      mockLeet.purge('foo.buz.baz', true);
+      assert.property(mock, 'foo');
+      assert.property(mock.foo, 'bar');
+      assert.property(mock.foo.bar, 'baz');
+      assert.property(mock.foo.bar.baz, 'bin');
+      done();
+    });
+  });
 });

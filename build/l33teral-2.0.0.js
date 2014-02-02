@@ -1,5 +1,5 @@
 /**
- * l33teral 1.0.0
+ * l33teral 2.0.0
  *
  * The MIT License (MIT)
  *
@@ -52,9 +52,14 @@
    * @param {String} message
    * @constructor
    */
-  function GraphError(message) {
-    Error.apply(this, arguments);
+  function GraphError(operation, message) {
+    if (arguments.length === 1) {
+      message = operation;
+      operation = '';
+    }
+    Error.call(this, message);
     this.name = 'GraphError';
+    this.operation = operation;
   }
 
   GraphError.prototype = new Error();
@@ -66,7 +71,7 @@
    * @constructor
    */
   function L33teral(obj) {
-    this.__version__ = '1.0.0';
+    this.__version__ = '2.0.0';
     this.obj = obj || {};
   }
 
@@ -97,7 +102,7 @@
         return defaultValue;
       }
 
-      var e = new GraphError('graph detection failed');
+      var e = new GraphError('tap', 'graph detection failed');
       e.failedAt = properties.slice(0, index + 1).join('.');
       throw e;
     }
@@ -333,6 +338,103 @@
       }
       if (isLast()) {
         current[segment] = value;
+      }
+      current = current[segment];
+      position += 1;
+    }
+  };
+
+  /**
+   * Deletes the key at the end of an object path
+   * @param {String} path
+   * @param {Boolean} [suppressError] - prevent a {GraphError} from being thrown if
+   * any part of the path cannot be fully resolved
+   * @throws {GraphError}
+   */
+  L33teral.prototype.snip = function (path, suppressError) {
+    if (!path) {
+      return;
+    }
+
+    var current = this.obj,
+      segments = path.split('.'),
+      position = 0,
+      length = segments.length,
+      segment;
+
+    function isMore() {
+      return position < length;
+    }
+
+    function isLast() {
+      return position === (length - 1);
+    }
+
+    while (isMore()) {
+      segment = segments[position];
+      if (!current.hasOwnProperty(segment)) {
+        if (suppressError) {
+          return;
+        }
+        var e = new GraphError('snip', 'graph detection failed');
+        e.failedAt = segments.slice(0, position + 1).join('.');
+        throw e;
+      }
+      if (isLast()) {
+        delete current[segment];
+      }
+      current = current[segment];
+      position += 1;
+    }
+  };
+
+  /**
+   * Deletes the key at the end of an object path (like `snip`), and all keys
+   * along the path in reverse if they resolve to empty objects, e.g.: given
+   * the literal `{foo: {stop:1, bar: {baz: {} } } }`, baz and bar would be
+   * deleted given the path `foo.bar.baz`, but foo would remain with the
+   * property `stop` because foo is not "empty" (still has keys).
+   * @param {String} path
+   * @param {Boolean} [suppressError] - prevent a {GraphError} from being thrown if
+   * any part of the path cannot be fully resolved
+   * @throws {GraphError}
+   */
+  L33teral.prototype.purge = function (path, suppressError) {
+    if (!path) {
+      return;
+    }
+
+    var current = this.obj,
+      segments = path.split('.'),
+      position = 0,
+      length = segments.length,
+      segment;
+
+    function isMore() {
+      return position < length;
+    }
+
+    function isLast() {
+      return position === (length - 1);
+    }
+
+    while (isMore()) {
+      segment = segments[position];
+      if (!current.hasOwnProperty(segment)) {
+        if (suppressError) {
+          return;
+        }
+        var e = new GraphError('snip', 'graph detection failed');
+        e.failedAt = segments.slice(0, position + 1).join('.');
+        throw e;
+      }
+      if (isLast()) {
+        delete current[segment];
+        if (Object.getOwnPropertyNames(current).length === 0) {
+          segments.pop();
+          path = segments.join('.');
+          return this.purge(path, suppressError);
+        }
       }
       current = current[segment];
       position += 1;

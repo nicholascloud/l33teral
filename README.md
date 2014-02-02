@@ -231,6 +231,39 @@ myLeet.plant('data.user.schedule', schedule);
 //myLeet.obj.data.user.schedule === schedule
 ```
 
+### snip (path, suppressError)
+
+Deletes the key at the end of an object path.
+
+- @param {String} path
+- @param {Boolean} [suppressError] - prevent a {GraphError} from being thrown if any part of the path cannot be fully resolved
+- @throws {GraphError}
+
+```javascript
+var mock = {foo: {bar: {baz: 'bin'}}};
+var mockLeet = leet(mock);
+mockLeet.snip('foo.bar.baz');
+assert.property(mock.foo, 'bar');
+assert.notProperty(mock.foo.bar, 'baz');
+```
+
+### purge (path, suppressError)
+
+Deletes the key at the end of an object path (like `snip`), and all keys along the path in reverse if they resolve to empty objects, e.g.: given the literal `{foo: {stop:1, bar: {baz: {} } } }`, baz and bar would be deleted given the path `foo.bar.baz`, but foo would remain with the property `stop` because foo is not "empty" (still has keys).
+
+- @param {String} path
+- @param {Boolean} [suppressError] - prevent a {GraphError} from being thrown if any part of the path cannot be fully resolved
+- @throws {GraphError}
+
+```javascript
+var mock = {foo: {stop:1, bar: {baz: {bin: {} } } } };
+var mockLeet = leet(mock);
+mockLeet.purge('foo.bar.baz.bin');
+assert.property(mock, 'foo');
+assert.property(mock.foo, 'stop');
+assert.notProperty(mock.foo, 'bar');
+```
+
 -----
 
 ## The MIT License (MIT)
