@@ -1,6 +1,6 @@
 {
   "name": "l33teral",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
   "keywords": ["literals", "objects", "utilities"],
