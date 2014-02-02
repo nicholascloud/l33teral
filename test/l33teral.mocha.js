@@ -4,7 +4,7 @@ var _ = require('underscore'),
   mocha = require('mocha'),
   assert = require('chai').assert,
   version = require('../package.json').version,
-  leet = require('../build/l33teral-' + version),
+  leet = require('../build/l33teral-latest'),
   mockObject = require('./mock-object');
 
 describe('L33teral', function () {

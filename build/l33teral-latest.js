@@ -1,5 +1,5 @@
 /**
- * l33teral 2.0.0
+ * l33teral 2.0.1
  *
  * The MIT License (MIT)
  *
@@ -71,7 +71,7 @@
    * @constructor
    */
   function L33teral(obj) {
-    this.__version__ = '2.0.0';
+    this.__version__ = '2.0.1';
     this.obj = obj || {};
   }
 
