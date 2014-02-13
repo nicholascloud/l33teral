@@ -1,6 +1,6 @@
 {
   "name": "l33teral",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
   "keywords": ["literals", "objects", "utilities"],
@@ -9,15 +9,14 @@
     "url": "git://github.com/nicholascloud/l33teral"
   },
   "dependencies": {
-    "underscore": "1.4.3"
+    "underscore": "1.5.2"
   },
   "devDependencies": {
-    "jake": "latest",
     "async": "0.2.5",
-    "mocha": "1.8.1",
     "chai": "1.4.2",
-    "underscore": "1.4.3",
     "clone": "0.1.5",
+    "jake": "latest",
+    "mocha": "1.8.1",
     "rimraf": "2.1.4"
   },
   "main": "./build/l33teral-latest",
