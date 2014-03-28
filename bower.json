@@ -1,6 +1,6 @@
 {
   "name": "l33teral",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "location": "git://github.com/nicholascloud/l33teral",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
