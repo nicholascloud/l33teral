@@ -22,6 +22,18 @@
 
 }(this, function (_, global, undefined) {
 
+  // use native otherwise polyfill
+  var create = Object.create || (function () {
+    var F = function () {};
+    return function (o) {
+      if (arguments.length > 1) { throw new Error('Second argument not supported');}
+      if (o === null) { throw new Error('Cannot set a null [[Prototype]]');}
+      if (typeof o !== 'object') { throw new TypeError('Argument must be an object');}
+      F.prototype = o;
+      return new F();
+    };
+  })();
+
   /**
    * GraphError constructor
    * @param {String} message
@@ -33,11 +45,13 @@
       operation = '';
     }
     Error.call(this, message);
+
     this.name = 'GraphError';
     this.operation = operation;
+    Error.captureStackTrace(this, this.constructor);
   }
 
-  GraphError.prototype = new Error();
+  GraphError.prototype = create(Error.prototype);
   GraphError.prototype.constructor = GraphError;
 
   /**
@@ -415,6 +429,7 @@
       position += 1;
     }
   };
+
 
   return function (literal) {
     return new L33teral(literal);
