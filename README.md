@@ -130,7 +130,7 @@ var values = myLeet.extract('data.user.name', 'data.user.phoneNumbers.1', 'data.
 
 Determines if the object has all specified properties
 
-__NOTE__: Like `hasOwnProperty`, this tests only for immediate instance properties. For graph testing, use `hasAllGraphs`.
+__NOTE__: Like `hasOwnProperty`, this tests only for immediate instance properties. For graph testing, use `probeAll`.
 
 - @param {...String|Array} properties
 - @return {Boolean}
@@ -152,7 +152,7 @@ leetUser.hasAllProperties('name', 'title', 'startDate');
 
 Determines if the object has any of the specified properties
 
-__NOTE__: Like `hasOwnProperty`, this tests only for immediate instance properties. For graph testing, use `hasAnyGraphs`.
+__NOTE__: Like `hasOwnProperty`, this tests only for immediate instance properties. For graph testing, use `probeAny`.
 
 - @param {...String|Array} properties
 - @return {Boolean}
