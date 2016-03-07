@@ -36,6 +36,7 @@
 
   /**
    * GraphError constructor
+   * @param operation
    * @param {String} message
    * @constructor
    */
@@ -53,6 +54,10 @@
 
   GraphError.prototype = create(Error.prototype);
   GraphError.prototype.constructor = GraphError;
+
+  var isNull = function (target) {
+    return Object.prototype.toString.call(target) === '[object Null]';
+  };
 
   /**
    * L33teral constructor
@@ -82,7 +87,7 @@
       useDefault = (arguments.length === 2);
 
     while (++index <= lastIndex) {
-      if (value.hasOwnProperty(properties[index])) {
+      if (!isNull(value) && value.hasOwnProperty(properties[index])) {
         value = value[properties[index]];
         continue;
       }
@@ -116,6 +121,9 @@
       lastIndex = properties.length - 1;
 
     while (++index <= lastIndex) {
+      if (isNull(value)) {
+        return false;
+      }
       if (!value.hasOwnProperty(properties[index])) {
         return false;
       }
@@ -312,17 +320,17 @@
       length = segments.length,
       segment;
 
-    function isMore() {
+    var isMore = function () {
       return position < length;
-    }
+    };
 
-    function isLast() {
+    var isLast = function () {
       return position === (length - 1);
-    }
+    };
 
     while (isMore()) {
       segment = segments[position];
-      if (!current.hasOwnProperty(segment)) {
+      if (!current.hasOwnProperty(segment) || isNull(current[segment])) {
         current[segment] = {};
       }
       if (isLast()) {
@@ -351,17 +359,17 @@
       length = segments.length,
       segment;
 
-    function isMore() {
+    var isMore = function () {
       return position < length;
-    }
+    };
 
-    function isLast() {
+    var isLast = function () {
       return position === (length - 1);
-    }
+    };
 
     while (isMore()) {
       segment = segments[position];
-      if (!current.hasOwnProperty(segment)) {
+      if (isNull(current) || !current.hasOwnProperty(segment)) {
         if (suppressError) {
           return;
         }
@@ -399,17 +407,17 @@
       length = segments.length,
       segment;
 
-    function isMore() {
+    var isMore = function () {
       return position < length;
-    }
+    };
 
-    function isLast() {
+    var isLast = function () {
       return position === (length - 1);
-    }
+    };
 
     while (isMore()) {
       segment = segments[position];
-      if (!current.hasOwnProperty(segment)) {
+      if (isNull(current) || !current.hasOwnProperty(segment)) {
         if (suppressError) {
           return;
         }
@@ -430,9 +438,12 @@
     }
   };
 
-
-  return function (literal) {
+  var exports = function (literal) {
     return new L33teral(literal);
   };
+
+  exports.GraphError = GraphError;
+
+  return exports;
 
 }));

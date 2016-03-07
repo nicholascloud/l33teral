@@ -20,7 +20,10 @@ var obj = {
       "type": "fax",
       "number": "646 555-4567"
     }
-  ]
+  ],
+  "occupation": {
+    "industry": null
+  }
 };
 
 module.exports = function () {
