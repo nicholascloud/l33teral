@@ -5,6 +5,7 @@ var _ = require('underscore'),
   assert = require('chai').assert,
   version = require('../package.json').version,
   leet = require('../build/l33teral-latest'),
+  GraphError = leet.GraphError,
   mockObject = require('./mock-object');
 
 describe('L33teral', function () {
@@ -51,7 +52,18 @@ describe('L33teral', function () {
 
       assert.throw(function () {
         leetMock.tap('address.missing');
-      }, Error);
+      }, GraphError);
+
+      done();
+    });
+
+    it('should throw if a property on the path is null and no default value is provided', function (done) {
+      var mock = mockObject();
+      var leetMock = leet(mock);
+
+      assert.throw(function () {
+        leetMock.tap('occupation.industry.name');
+      }, GraphError);
 
       done();
     });
@@ -127,6 +139,16 @@ describe('L33teral', function () {
       assert.isFalse(actual);
 
       actual = leetMock.probe('phoneNumber.2');
+      assert.isFalse(actual);
+
+      done();
+    });
+
+    it('should return false if a property on the path is null', function (done) {
+      var mock = mockObject();
+      var leetMock = leet(mock);
+
+      var actual = leetMock.probe('occupation.industry.name');
       assert.isFalse(actual);
 
       done();
@@ -423,6 +445,20 @@ describe('L33teral', function () {
       done();
     });
 
+    it('creates the remainder of an existing null property graph with a predetermined value', function (done) {
+      var mock = {
+        foo: {
+          bar: null
+        }
+      };
+      var mockLeet = leet(mock);
+      var expected = [1, 2, 3, 4];
+      mockLeet.plant('foo.bar.baz.bin', expected);
+      assert.deepProperty(mock, 'foo.bar.baz.bin');
+      assert.deepPropertyVal(mock, 'foo.bar.baz.bin', expected);
+      done();
+    });
+
     it('overrides an existing graph value with a predetermined value', function (done) {
       var mock = {
         foo: {
@@ -458,7 +494,18 @@ describe('L33teral', function () {
 
       assert.throw(function () {
         mockLeet.snip('foo.buz.baz');
-      }, Error);
+      }, GraphError);
+
+      done();
+    });
+
+    it('throws a graph error if part of the path is null', function (done) {
+      var mock = {foo: {bar: null}};
+      var mockLeet = leet(mock);
+
+      assert.throw(function () {
+        mockLeet.snip('foo.bar.baz');
+      }, GraphError);
 
       done();
     });
@@ -496,12 +543,23 @@ describe('L33teral', function () {
 
       assert.throw(function () {
         mockLeet.purge('foo.buz.baz');
-      }, Error);
+      }, GraphError);
 
       assert.property(mock, 'foo');
       assert.property(mock.foo, 'bar');
       assert.property(mock.foo.bar, 'baz');
       assert.property(mock.foo.bar.baz, 'bin');
+      done();
+    });
+
+    it('throws a graph error if part of the path is null', function (done) {
+      var mock = {foo: {bar: null } };
+      var mockLeet = leet(mock);
+
+      assert.throw(function () {
+        mockLeet.purge('foo.bar.baz');
+      }, GraphError);
+
       done();
     });
 
