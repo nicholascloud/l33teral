@@ -21,12 +21,16 @@ You might think I'm kidding about this but I've seen this code. It haunts my dre
 
 I hate this so much that I created this library, `l33teral` (pronounced: `leet-er-all`) to stop this madness.
 
+## Dependencies
+
+None. (__Note__: l33teral < v3.0.0 depends on Underscore.js.)
+
 ## Usage
 
 _l33teral will work in node.js, or in the browser with require.js, or in the browser as a direct include with script tags. All examples in the README are node.js examples, but the API is the same regardless of environment._
 
 ```javascript
-var leet = require('l33teral');
+var l33t = require('l33teral');
 
 var myLiteral = {
   data: {
@@ -48,7 +52,7 @@ var myLiteral = {
   }
 };
 
-var myLeet = leet(myLiteral);
+var myLeet = l33t(myLiteral);
 // now use methods on myLeet
 ```
 
@@ -143,7 +147,7 @@ var user = {
   startDate: '2013-01-01'
 };
 
-var leetUser = leet(user);
+var leetUser = l33t(user);
 leetUser.hasAllProperties('name', 'title', 'startDate');
 // true
 ```
@@ -165,7 +169,7 @@ var user = {
   startDate: '2013-01-01'
 };
 
-var leetUser = leet(user);
+var leetUser = l33t(user);
 leetUser.hasAnyProperties('dob', 'title', 'ssn');
 // true
 ```
@@ -241,7 +245,7 @@ Deletes the key at the end of an object path.
 
 ```javascript
 var mock = {foo: {bar: {baz: 'bin'}}};
-var mockLeet = leet(mock);
+var mockLeet = l33t(mock);
 mockLeet.snip('foo.bar.baz');
 assert.property(mock.foo, 'bar');
 assert.notProperty(mock.foo.bar, 'baz');
@@ -257,7 +261,7 @@ Deletes the key at the end of an object path (like `snip`), and all keys along t
 
 ```javascript
 var mock = {foo: {stop:1, bar: {baz: {bin: {} } } } };
-var mockLeet = leet(mock);
+var mockLeet = l33t(mock);
 mockLeet.purge('foo.bar.baz.bin');
 assert.property(mock, 'foo');
 assert.property(mock.foo, 'stop');

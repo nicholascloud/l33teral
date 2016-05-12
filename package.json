@@ -1,6 +1,6 @@
 {
   "name": "l33teral",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
   "keywords": ["literals", "objects", "utilities"],
@@ -9,7 +9,6 @@
     "url": "git://github.com/nicholascloud/l33teral"
   },
   "dependencies": {
-    "underscore": "1.5.2"
   },
   "devDependencies": {
     "async": "0.2.5",
@@ -21,7 +20,6 @@
   },
   "main": "./build/l33teral-latest",
   "scripts": {
-    "test": "./node_modules/.bin/jake test --trace",
-    "prepublish": "./node_modules/.bin/jake build"
+    "test": "./node_modules/.bin/jake test --trace"
   }
 }
