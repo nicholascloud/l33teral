@@ -5,22 +5,21 @@
   // CommonJS (node) module
   if (typeof module === 'object' && module.exports) {
     return module.exports = factory(
-      require('underscore'),
       global
     );
   }
 
   // AMD module
   if (typeof define === 'function' && define.amd) {
-    return define(['underscore'], function (_) {
-      return factory(_, global);
+    return define([], function () {
+      return factory(global);
     });
   }
 
   // browser
-  global.l33teral = factory(global._, global);
+  global.l33teral = factory(global);
 
-}(this, function (_, global, undefined) {
+}(this, function (global, undefined) {
 
   // use native otherwise polyfill
   var create = Object.create || (function () {
@@ -57,6 +56,18 @@
 
   var isNull = function (target) {
     return Object.prototype.toString.call(target) === '[object Null]';
+  };
+
+  var isUndefined = function (target) {
+    return Object.prototype.toString.call(target) === '[object Undefined]';
+  };
+  
+  var isArray = Array.isArray ? Array.isArray : function (target) {
+    return Object.prototype.toString.call(target) === '[object Array]';
+  };
+
+  var isObject = function (target) {
+    return Object.prototype.toString.call(target) === '[object Object]';
   };
 
   /**
@@ -101,7 +112,7 @@
       throw e;
     }
 
-    if (_.isUndefined(value) && useDefault) {
+    if (isUndefined(value) && useDefault) {
       return defaultValue;
     }
 
@@ -151,11 +162,11 @@
     var virginPaths = paths;
     var hasDefaults = false;
 
-    if (_.isObject(paths) && !_.isArray(paths)) {
+    if (isObject(paths) && !isArray(paths)) {
       paths = Object.keys(paths);
       hasDefaults = true;
     }
-    if (!_.isArray(paths)) {
+    if (!isArray(paths)) {
       paths = Array.prototype.slice.call(arguments, 0);
     }
 
@@ -191,10 +202,10 @@
   L33teral.prototype.extract = function (paths) {
     var values = this.collect.apply(this, arguments);
 
-    if (_.isObject(paths) && !_.isArray(paths)) {
+    if (isObject(paths) && !isArray(paths)) {
       paths = Object.keys(paths);
     }
-    if (!_.isArray(paths)) {
+    if (!isArray(paths)) {
       paths = Array.prototype.slice.call(arguments, 0);
     }
 
@@ -224,7 +235,7 @@
   L33teral.prototype.hasAllProperties = function (properties) {
     var self = this;
 
-    if (!_.isArray(properties)) {
+    if (!isArray(properties)) {
       properties = Array.prototype.slice.call(arguments, 0);
     }
 
@@ -241,7 +252,7 @@
   L33teral.prototype.hasAnyProperties = function (properties) {
     var self = this;
 
-    if (!_.isArray(properties)) {
+    if (!isArray(properties)) {
       properties = Array.prototype.slice.call(arguments, 0);
     }
 
@@ -258,7 +269,7 @@
   L33teral.prototype.probeAll = function (paths) {
     var self = this;
 
-    if (!_.isArray(paths)) {
+    if (!isArray(paths)) {
       paths = Array.prototype.slice.call(arguments, 0);
     }
 
@@ -275,7 +286,7 @@
   L33teral.prototype.probeAny = function (paths) {
     var self = this;
 
-    if (!_.isArray(paths)) {
+    if (!isArray(paths)) {
       paths = Array.prototype.slice.call(arguments, 0);
     }
 
@@ -293,7 +304,7 @@
   L33teral.prototype.truthy = function (paths) {
     var self = this;
 
-    if (!_.isArray(paths)) {
+    if (!isArray(paths)) {
       paths = Array.prototype.slice.call(arguments, 0);
     }
 
