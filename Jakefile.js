@@ -8,8 +8,7 @@ var pkg = require('./package.json'),
   rimraf = require('rimraf');
 
 var ROOT_DIR = __dirname,
-  BUILD_DIR = path.join(ROOT_DIR, 'build'),
-  TEST_DIR = path.join(ROOT_DIR, 'test');
+  BUILD_DIR = path.join(ROOT_DIR, 'build');
 
 var VERSION_TEMPLATE_VAR = /\{\{VERSION\}\}/g;
 
@@ -47,16 +46,6 @@ task('build', ['clean', BUILD_DIR], function () {
     console.log('Build complete.');
     console.log('Output:', outputFile);
   });
-});
-
-desc('runs unit tests');
-task('test', ['build'], function () {
-  console.log('@@ TEST_DIR', TEST_DIR);
-
-  var mochaBin = path.join(ROOT_DIR, 'node_modules', '.bin', 'mocha');
-  var testCmd = mochaBin + ' ' + TEST_DIR;
-  jake.exec(testCmd, function () {
-  }, {printStdout: true});
 });
 
 task('default', function () {

@@ -1,25 +1,28 @@
 {
   "name": "l33teral",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "Nicholas Cloud",
   "description": "functions to help deal with object literals",
-  "keywords": ["literals", "objects", "utilities"],
+  "keywords": [
+    "literals",
+    "objects",
+    "utilities"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/nicholascloud/l33teral"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "async": "0.2.5",
-    "chai": "1.4.2",
-    "clone": "0.1.5",
+    "async": "^2.0.0-rc.4",
+    "chai": "^3.5.0",
+    "clone": "^1.0.2",
     "jake": "latest",
-    "mocha": "1.8.1",
-    "rimraf": "2.1.4"
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2"
   },
   "main": "./build/l33teral-latest",
   "scripts": {
-    "test": "./node_modules/.bin/jake test --trace"
+    "test": "jake build && ./node_modules/.bin/mocha test"
   }
 }

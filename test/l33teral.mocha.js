@@ -1,7 +1,6 @@
 /*global describe, it*/
 'use strict';
-var _ = require('underscore'),
-  mocha = require('mocha'),
+var mocha = require('mocha'),
   assert = require('chai').assert,
   version = require('../package.json').version,
   leet = require('../build/l33teral-latest'),
@@ -31,15 +30,15 @@ describe('L33teral', function () {
     it('should be empty if the constructor argument is null or undefined', function (done) {
       var leetMock = leet(null);
       assert.isNotNull(leetMock.obj);
-      assert.isTrue(_.isEmpty(leetMock.obj));
+      assert.equal(0, Object.keys(leetMock.obj));
 
       leetMock = leet(undefined);
       assert.isNotNull(leetMock.obj);
-      assert.isTrue(_.isEmpty(leetMock.obj));
+      assert.equal(0, Object.keys(leetMock.obj));
 
       leetMock = leet();
       assert.isNotNull(leetMock.obj);
-      assert.isTrue(_.isEmpty(leetMock.obj));
+      assert.equal(0, Object.keys(leetMock.obj));
 
       done();
     });
