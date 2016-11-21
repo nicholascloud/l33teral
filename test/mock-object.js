@@ -22,7 +22,8 @@ var obj = {
     }
   ],
   "occupation": {
-    "industry": null
+    "industry": null,
+    "employer": undefined
   }
 };
 

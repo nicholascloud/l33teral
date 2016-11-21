@@ -150,6 +150,9 @@ describe('L33teral', function () {
       var actual = leetMock.probe('occupation.industry.name');
       assert.isFalse(actual);
 
+      var actual = leetMock.probe('occupation.employer.name');
+      assert.isFalse(actual);
+
       done();
     });
   });
