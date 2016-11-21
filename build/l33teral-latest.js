@@ -157,7 +157,7 @@
       lastIndex = properties.length - 1;
 
     while (++index <= lastIndex) {
-      if (isNull(value)) {
+      if (isNull(value) || isUndefined(value)) {
         return false;
       }
       if (!value.hasOwnProperty(properties[index])) {
